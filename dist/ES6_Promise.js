@@ -13,11 +13,11 @@
  *  所以输出顺序为 promise -- hi -- resolved
  */
 {
-    var promise = new Promise(function (resolve, reject) {
+    let promise = new Promise((resolve, reject) => {
         console.log('Promise');
         resolve();
     });
-    promise.then(function () {
+    promise.then(() => {
         console.log('resolved');
     });
     console.log('Hi');

@@ -49,3 +49,65 @@
         console.log(2);
     })
 }
+
+/**
+ *  promise抛出一个错误，就被catch方法指定的回调函数捕获。
+ */
+{
+    let promise = new Promise((resolve, reject) => {
+        throw new Error('error test');
+    })
+
+    promise.catch((error) => {
+        console.log(error);
+    })
+}
+
+/**
+ * then/catch 好于 then（resolved，reject），因为then/catch也可以捕获then方法中执行的错误
+ *
+ */
+{
+   let promise = new Promise((resolve, reject) => {
+       console.log('promise resolved');
+   });
+
+   //then(resolved, reject)
+   promise.then((data) => {
+       console.log(data);
+   }, (error) => {
+       console.log(error);
+   })
+
+    //then/catch
+    promise
+        .then((data) => {
+            console.log(data);
+    })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+
+/**
+ *  Promise 会吃掉错误 -- Promise 内部的错误不会影响到 Promise 外部的代码
+ *  所以输出是：
+ *  Uncaught (in promise) ReferenceError: x is not defined
+ *  123
+ */
+{
+    let someAsyncThing = () => {
+        return new Promise((resolve, reject) => {
+            resolve(x + 2);
+        });
+    };
+
+    someAsyncThing().then(() => {
+        console.log('every thing is fine.');
+    });
+
+    setTimeout(() => {
+        console.log(123);
+    }, 2000)
+}

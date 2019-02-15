@@ -21,5 +21,12 @@ module.exports = [
             filename: 'file_reader_compiled.js',
             path: path.resolve(__dirname, 'compiled_js')
         }
-    }
+    },
+    {
+        entry: './src/js/ES6_async.js',
+        output: {
+            filename: 'es6_async_compiled.js',
+            path: path.resolve(__dirname, 'compiled_js')
+        }
+    },
 ];
